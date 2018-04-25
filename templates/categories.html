@@ -1,0 +1,46 @@
+<html lang = "en" >
+
+<head>
+
+    <meta charset= "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <div class='pane'>
+        <h1>Pick the Category that you enjoy the most</h1>
+
+        <b><br>
+
+                {% for category in categories %}
+            <div class='category'>
+
+<h2><a href = "{{url_for('showStudio', category_id = category.id)}}"> <p>{{category.name}}</p></a></h2>
+
+<p><a href = "{{url_for('editCategory',category_id = category.id)}}">Edit Category</a></p>
+
+<p> <a href = "{{url_for('deleteCategory',category_id = category.id)}}">Delete Category</a> </p>
+
+<img src="https://ak8.picdn.net/shutterstock/videos/30307858/thumb/1.jpg" alt="Yoga">
+
+                <br>
+
+			</div>
+
+{% endfor %}
+
+			<br><br>
+
+			<div class = 'new'>
+				<a href="{{url_for('newCategory')}}" >Create a New Category</a>
+
+</div>
+
+</body>
+
+</html>
