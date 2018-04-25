@@ -218,10 +218,10 @@ def gconnect():
     output += '<img src="'
     output += login_session['picture']
     output += ' " style = "width: 300px;' \
-            'height: 300px;'\
-            'border-radius: 150px;'\
-            '-webkit-border-radius: 150px;'\
-            '-moz-border-radius: 150px;"> '
+                           'height: 300px;' \
+                          'border-radius: 150px;' \
+                          '-webkit-border-radius: 150px;' \
+                          '-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -375,8 +375,8 @@ def deleteCategory(category_id):
         Category).filter_by(id=category_id).one()
     if categoryToDelete.user_id != login_session['user_']:
         if request.method == 'POST':
-        session.delete(categoryToDelete)
-        session.commit()
+            session.delete(categoryToDelete)
+            session.commit()
         return redirect(
             url_for('showCategories', category_id=category_id))
     else:
@@ -393,7 +393,8 @@ def showStudios(category_id):
     creator = getUserInfo(category.user_id)
     items = session.query(StudioItem).filter_by(
         category_id=category_id).all()
-    if 'username' not in login_session or creator.id != login_session['user_id']:
+    if 'username' not in login_session or creator.id != \
+            login_session['user_id']:
         return render_template('publiccategory.html', items=items,
                                category=category, creator=creator)
     else:
@@ -416,7 +417,7 @@ def newStudio(category_id):
                "onload='myFunction()''>"
     if request.method == 'POST':
         newstudio = StudioItem(name=request.form['name'], category=request.form
-                    [description'], price=request.form['price'],
+                               [description'], price=request.form['price'],
                                Address=request.form['course'],
                                category_id=category_id)
         session.add(newstudio)
