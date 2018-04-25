@@ -1,7 +1,6 @@
 body {
      font-family: sans-serif;
      background-color: #17202A;
-
 }
  h1, h2, h3, h4 {
      color: #0c0c0c;
@@ -20,12 +19,12 @@ body {
      color: #CCCCCC;
 }
  a {
-    text-decoration: none;
+     text-decoration: none;
      color:#000000;
      font-size: .75em;
 }
- .pane {
-    position:absolute;
+ .panel {
+     position:absolute;
      left: 25%;
      border: 2px solid;
      border-radius: 25px;
@@ -35,22 +34,22 @@ body {
      background-color: #ffffff;
 }
  .header {
-    left:50%;
+     left:50%;
      text-align: center;
 }
  .name {
-    width:50%;
-    display: inline-block;
+     width:50%;
+     display: inline-block;
      float: left;
 }
  .description {
 }
  .price {
-    text-align: right;
+     text-align: right;
      width:50%;
      float: right;
 }
- .editdeletepane{
+ .editdeletepanel{
 }
  .flash {
      background: #cee5F5;
