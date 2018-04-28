@@ -17,6 +17,7 @@ class User(Base):
     picture = Column(String(250))
     user_id = Column(String(250))
 
+
 class Category(Base):
     __tablename__ = 'category'
 
@@ -32,6 +33,7 @@ class Category(Base):
             'name': self.name,
             'id': self.id,
         }
+
 
 class StudioItem(Base):
     __tablename__ = 'studio_item'
@@ -65,3 +67,4 @@ engine = create_engine('sqlite:///collectioncatalog.db')
 
 
 Base.metadata.create_all(engine)
+
