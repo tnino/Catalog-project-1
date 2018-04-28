@@ -51,7 +51,9 @@ def newMenuItem(restaurant_id):
 
     if request.method == 'POST':
         newItem = MenuItem(name=request.form['name'], description=request.form[
-                           'description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
+                           'description'], price=request.form['price'],
+                           course=request.form['course'],
+                           restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
@@ -73,7 +75,8 @@ def editMenuItem(restaurant_id, menu_id):
         # USE THE RENDER_TEMPLATE FUNCTION BELOW TO SEE THE VARIABLES YOU
         # SHOULD USE IN YOUR EDITMENUITEM TEMPLATE
         return render_template(
-            'editmenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=editedItem)
+            'editmenuitem.html', restaurant_id=restaurant_id,
+            menu_id=menu_id, item=editedItem)
 
 
 @app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/delete/')
