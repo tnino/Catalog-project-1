@@ -218,7 +218,7 @@ def gconnect():
     output += '<img src="'
     output += login_session['picture']
     output += ' " style = "width: 300px;' \
-                           'height: 300px;' \
+                          'height: 300px;' \
                           'border-radius: 150px;' \
                           '-webkit-border-radius: 150px;' \
                           '-moz-border-radius: 150px;"> '
