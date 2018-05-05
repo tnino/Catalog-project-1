@@ -219,9 +219,9 @@ def gconnect():
     output += login_session['picture']
     output += ' " style = "width: 300px;' \
                           'height: 300px;' \
-                          'border-radius: 150px;' \
-                          '-webkit-border-radius: 150px;' \
-                          '-moz-border-radius: 150px;"> '
+                         'border-radius: 150px;' \
+                         '-webkit-border-radius: 150px;' \
+                         '-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -305,12 +305,6 @@ def StudioJSON(category_id):
 def categoryItemJSON(category_id, item_id):
     Studio = session.query(Item).filter_by(id=item_id).one()
     return jsonify(studio=Studio.serialize)
-
-
-@app.route('/category/JSON')
-def categoryJSON():
-    categories = session.query(Category).all()
-    return jsonify(category=[r.serialize for r in categories])
 
 
 # Show all category
@@ -416,8 +410,9 @@ def newStudio(category_id):
                "new favorite studio in the area.');}</script><body " \
                "onload='myFunction()''>"
     if request.method == 'POST':
-        newstudio = StudioItem(name=request.form['name'], category=request.form
-                               [description'], price=request.form['price'],
+        newstudio = StudioItem(name=request.form['name'],
+                               category=request.form[description],
+                               Price=request.form['price'],
                                Address=request.form['course'],
                                category_id=category_id)
         session.add(newstudio)
