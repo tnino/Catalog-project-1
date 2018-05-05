@@ -1,96 +1,115 @@
-{% extends "main.html" %} {% block content %} {% include "header.html" %}
-
-<div class="row divider green">
-    <div class="col-md-12"></div>
-</div>
-<div class="row banner menu">
-    <div class="col-md-11 col-md-offset-1 padding-none">
-        <h1>{{ name }}
-				{% if creator %}
-			<figure class="creator">
-				<img src="{{ creator.picture}}">
-				<figcaption>{{ creator.name }}</figcaption>
-			</figure>
-				{% endif %}
-			</h1>
-    </div>
-</div>
-<div class="row padding-top padding-bottom">
-    <div class="col-md-1"></div>
-    <div class="col-md-11 padding-none">
-
-    </div>
-    <div class="col-md-7"></div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        {% with messages = get_flashed_messages() %} {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li> <strong> {{ message }} </strong> </li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% endwith %}
-    </div>
-</div>
-{% if items !=[] %}
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-        <h2>Spin</h2> {% for i in items %} {% if i.course == 'Spin' %}
-        <div class="studio-item">
-            <h3>{{i.name}}</h3>
-            <p>{{i.description}}</p>
-            <p class="studio-price">{{i.price}}</p>
-            <p class="address">{{i.price}}</p>
-
-        </div>
-        {% endif %} {% endfor %}
-    </div>
-    <div class="col-md-4">
-        <h2>Yoga</h2> {% for i in items %} {% if i.course == 'Yoga' %}
-        <div class="studio-item">
-            <h3>{{i.name}}</h3>
-            <p>{{i.description}}</p>
-            <p class="studio-price">{{i.price}}</p>
-            <p class="address">{{i.price}}</p>
-
-        </div>
-        {% endif %} {% endfor %}
-    </div>
-    <div class="col-md-3">
-        <h2>Kickboxing</h2> {% for i in items %} {% if i.course == 'Kickboxing' %}
-        <div class="studio-item">
-            <h3>{{i.name}}</h3>
-            <p>{{i.description}}</p>
-            <p class="studio-price">{{i.price}}</p>
-            <p class="address">{{i.price}}</p>
-
-        </div>
-        {% endif %} {% endfor %}
-
-        <h2>Barre</h2> {% for i in items %} {% if i.course == 'Barre' %}
-        <div class="studio-item">
-            <h3>{{i.name}}</h3>
-            <p>{{i.description}}</p>
-            <p class="studio-price">{{i.price}}</p>
-            <p class="address">{{i.price}}</p>
-
-        </div>
-        {% endif %} {% endfor %}
-
-        <div class="col-md-3">
-            <h2>Dance</h2> {% for i in items %} {% if i.course == 'Kickboxing' %}
-            <div class="studio-item">
-                <h3>{{i.name}}</h3>
-                <p>{{i.description}}</p>
-                <p class="studio-price">{{i.price}}</p>
-                <p class="address">{{i.price}}</p>
-
+{% block content %} {% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+   </head>
+   <body>
+      <!--code from publiccategory.hmtl template-->
+      <div class="row divider green">
+         <div class="col-md-12"></div>
+      </div>
+      <div class="row banner menu">
+         <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>
+               {{ name }}
+               {% if creator %}
+               <figure class="creator">
+                  <img src="{{ creator.picture}}">
+                  <figcaption>{{ creator.name }}</figcaption>
+               </figure>
+            </h1>
+         </div>
+      </div>
+      <div class="row padding-top padding-bottom">
+         <div class="col-md-1"></div>
+         <div class="col-md-11 padding-none">
+         </div>
+         <div class="col-md-7"></div>
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li> <strong> {{ message }} </strong> </li>
+               {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+         </div>
+      </div>
+      {% if items !=[] %}
+      <!--my code from categoriesstudios.html -->
+      <div class="row">
+         <div class="col-md-1"></div>
+         <div class="col-md-3">
+            <h2>name</h2>
+            <br>
+            <div class="row-flex">
+               {% for i in items %}
+               {% if i.category.lower() == 'clothing' %}
+               <div class="col-md-4">
+                  <div id="items">
+                     <img class="img-responsive" src="/static/images/{{i.name.lower()}}.jpg" alt="{{i.name}}">
+                  </div>
+                  <br>
+                  <br>
+                  <div class="details row">
+                     <p>{{i.name}} {{i.price}}</p>
+                     <p style="font-size:1.25em">{{i.description}}</p>
+                     <a style="letter-spacing:2px" href='{{url_for('editCategory', category_id = category.id, studio_id=i.id ) }}'>Edit</a> | <a style="letter-spacing:2px" href='{{url_for('deletecategoryItem', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
+                  </div>
+                  <br>
+                  <br>
+               </div>
+               <br>
+               <br>
+               {% endif %}
+               {% endfor %}
             </div>
-            {% endif %} {% endfor %}
-
-        </div>
-        <div class="col-md-1"></div>
-    </div>
-    {% endif %} {% endblock %}
+         </div>
+         <br>
+         <br>
+         <h2>studios</h2>
+         <br>
+         <div class='row-flex'>
+            {% for i in items %} {% if i.category.lower() == 'accessories' %}
+            <div class="col-md-4">
+               <img class="img-responsive" src="/static/images/{{i.name.lower()}}.jpg" alt="{{i.name}}">
+               <br>
+               <br>
+               <div class="details row">
+                  <p>{{i.name}} {{i.price}}</p>
+                  <p style="font-size:1.25em">{{i.description}}</p>
+                  <a style="letter-spacing:2px" href='{{url_for('editstudioitem', category_id = category.id, studio_id=i.id ) }}'>Edit</a> | <a style="letter-spacing:2px" href='{{url_for('deletestudioitem', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
+               </div>
+               <br>
+               <br>
+            </div>
+            <br>
+            <br> {% endif %} {% endfor %}
+         </div>
+         <br>
+         <br>
+         <div class="new">
+            <a href="{{url_for('newCategory', studio_id = studio.id )}}">Create a New studio</a>
+         </div>
+         {% endif %}
+         <br>
+         <br>
+         <p> You currently have no collection items.
+         <p>
+            {% endif %}
+      </div>
+   </body>
+</html>
+{% endblock %}
