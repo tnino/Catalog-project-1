@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Category, Base, StudioItem, User
+from database_setup import Category, Base, StudioItem
 from flask import session as login_session
 import random
 import string
@@ -192,7 +193,7 @@ def gconnect():
 
     # Store the access token in the session for later use.
     login_session['access_token'] = credentials.access_token
-    login_session['gplus_id'] = gplus_id
+    login_session['user_id'] = gplus_id
 
     # Get user info
     userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
@@ -340,7 +341,8 @@ def newCategory():
 def editCategory(category_id):
     editedcategory = session.query(
         Category).filter_by(id=category_id).one()
-    if categoryToEdit.user_id != login_session['user_']:
+
+    if editCategory.user_id != login_session['user_id']:
         if 'username' not in login_session:
             return redirect('/login')
     if editedcategory.user_id != login_session['user_id']:
@@ -357,7 +359,7 @@ def editCategory(category_id):
         return render_template(
             'editCategory.html', category=editedcategory)
 
-# return 'This page will be for editing restaurant %s' % restaurant_id
+# return 'This page will be for editing category %s' % category_id
 
 
 # Delete a Category
@@ -376,7 +378,7 @@ def deleteCategory(category_id):
     else:
         return render_template(
             'deleteCategory.html', category=categoryToDelete)
-    # return 'This page will be for deleting restaurant %s' % restaurant_id
+    # return 'This page will be for deleting category %s' % category_id
 
 
 # Show a studio
@@ -423,8 +425,8 @@ def newStudio(category_id):
         return render_template('newstudioitem.html', category_id=category_id)
 
     # return render_template('newStudioItem.html', category=category)
-    # return 'This page is for making a new menu item for restaurant %s'
-    # %restaurant_id
+    # return 'This page is for making a new menu item for category %s'
+    # %category_id
 
 
 # Edit a menu item
@@ -490,10 +492,10 @@ def disconnect():
         del login_session['user_id']
         del login_session['provider']
         flash("You have successfully been logged out.")
-        return redirect(url_for('showRestaurants'))
+        return redirect(url_for('showCategories'))
     else:
         flash("You were not logged in")
-        return redirect(url_for('showRestaurants'))
+        return redirect(url_for('showCategories'))
 
 if __name__ == '__main__':
     app.debug = True
