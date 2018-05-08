@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from database_setup import studio_id
+import name, description, price, Adress, s
 
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///restaurantmenu.db')
+engine = create_engine('sqlite:///collectioncatalog.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -13,14 +14,14 @@ session = DBSession()
 
 
 @app.route('/')
-def restaurantMenu(restaurant_id):
-    restaurant = session.query(Restaurant).first()
-    items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
+def categoryStudio(category_id):
+    category = session.query(Category).first()
+    studio_item = session.query(StudioItem).filter_by(category_id=category.id)
     output = ''
     for i in items:
         output += i.name
         output += '</br>'
-        output += i.price
+        output += i.studio_id
         output += '</br>'
         output += i.description
         output += '</br>'
@@ -29,10 +30,10 @@ def restaurantMenu(restaurant_id):
     return output
 
 
-@app.route('/restaurants/<int:restaurant_id>/')
-def restaurantMenu(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
+@app.route('/categories/<int:category_id>/')
+def categoryStudio(studio_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    items = session.query(StudioItem).filter_by(category_id=category_id)
     output = ''
     for i in items:
         output += i.name
@@ -41,48 +42,50 @@ def restaurantMenu(restaurant_id):
         output += '</br>'
         output += i.description
         output += '</br>'
+        output += i.studio_id
         output += '</br>'
 
     return output
 
 
-@app.route('/restaurants/<int:restaurant_id>/new', methods=['GET', 'POST'])
-def newMenuItem(restaurant_id):
+@app.route('/categories/<int:category_id>/new', methods=['GET', 'POST'])
+def newStudioItem(category_id):
 
     if request.method == 'POST':
-        newItem = MenuItem(name=request.form['name'], description=request.form[
+        newStudioItem = MenuItem(name=request.form['name'], description=request.form[
                            'description'], price=request.form['price'],
                            course=request.form['course'],
-                           restaurant_id=restaurant_id)
-        session.add(newItem)
+                           category_id=category_id)
+        session.add(newStudioItem)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
+        return redirect(url_for('restaurantMenu', category_id=category_id))
     else:
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
+        return render_template('newstudioitem.html', category_id=category_id)
 
 
-@app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit',
+@app.route('/categories/<int:category_id>/<int:studio_id>/edit',
            methods=['GET', 'POST'])
-def editMenuItem(restaurant_id, menu_id):
-    editedItem = session.query(MenuItem).filter_by(id=menu_id).one()
+def editStudioItem(category_id, menu_id):
+    editedStudioItem = session.query(StudioItem).filter_by(id=studio_id).one()
     if request.method == 'POST':
         if request.form['name']:
-            editedItem.name = request.form['name']
-        session.add(editedItem)
+            editedStudio.name = request.form['name']
+        session.add(editedStudio)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
+        return redirect(url_for('restaurantMenu', category_id=category_id))
     else:
         # USE THE RENDER_TEMPLATE FUNCTION BELOW TO SEE THE VARIABLES YOU
-        # SHOULD USE IN YOUR EDITMENUITEM TEMPLATE
+        # SHOULD USE IN YOUR EDITSTUDIO TEMPLATE
         return render_template(
-            'editmenuitem.html', restaurant_id=restaurant_id,
-            menu_id=menu_id, item=editedItem)
+            'editmenuitem.html', category_id=category_id,
+            studio_id=studio_id, studio=editedStudio)
 
 
-@app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/delete/')
-def deleteMenuItem(restaurant_id, menu_id):
-    return "page to delete a new menu item."
+@app.route('/category/<int:category_id>/<int:studio_id>/delete/')
+def deleteStudio(category_id, studio_id):
+    return "page to delete a new Studio item."
 
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
+
