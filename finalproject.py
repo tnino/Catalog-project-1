@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Category, Base, StudioItem
+from database_setup import Category, Base, StudioItem, User
 from flask import session as login_session
 import random
 import string
@@ -219,7 +219,7 @@ def gconnect():
     output += '<img src="'
     output += login_session['picture']
     output += ' " style = "width: 300px;' \
-                          'height: 300px;' \
+                         'height: 300px;' \
                          'border-radius: 150px;' \
                          '-webkit-border-radius: 150px;' \
                          '-moz-border-radius: 150px;"> '
@@ -337,28 +337,24 @@ def newCategory():
 
 
 # Edit a category
+
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
 def editCategory(category_id):
-    editedcategory = session.query(
+    editedCategory = session.query(
         Category).filter_by(id=category_id).one()
-
-    if editCategory.user_id != login_session['user_id']:
-        if 'username' not in login_session:
-            return redirect('/login')
-    if editedcategory.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized" \
-               " to edit this category at this moment. ');}</script><body " \
-               "onload='myFunction()''>"
+    if 'username' not in login_session:
+        return redirect('/login')
+    if editedCategory.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized to edit this collection. " \
+               "Please create your own collection in order to edit.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
-            editedcategory.name = request.form['name']
-            flash('thank you for Successfully Editing this category %s'
-                  % editedcategory.name)
-            return redirect(url_for('showCategories'))
+            editedCategory.name = request.form['name']
+            flash('Category Successfully Edited %s' % editedCategory.name)
+            return redirect(url_for('showCategory'))
     else:
-        return render_template(
-            'editCategory.html', category=editedcategory)
-
+        return render_template('editCategory.html',
+                                category=editedCategory)
 # return 'This page will be for editing category %s' % category_id
 
 
@@ -369,7 +365,7 @@ def deleteCategory(category_id):
         return redirect('/login')
     categoryToDelete = session.query(
         Category).filter_by(id=category_id).one()
-    if categoryToDelete.user_id != login_session['user_']:
+    if categoryToDelete.user_id != login_session['user_id']:
         if request.method == 'POST':
             session.delete(categoryToDelete)
             session.commit()
