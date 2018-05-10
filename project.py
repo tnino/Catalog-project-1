@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import studio_id
-import name, description, price, Adress, s
 
 app = Flask(__name__)
 
@@ -52,7 +51,8 @@ def categoryStudio(studio_id):
 def newStudioItem(category_id):
 
     if request.method == 'POST':
-        newStudioItem = MenuItem(name=request.form['name'], description=request.form[
+        newStudioItem = MenuItem(name=request.form['name'],
+                                 description=request.form[
                            'description'], price=request.form['price'],
                            course=request.form['course'],
                            category_id=category_id)
@@ -88,4 +88,3 @@ def deleteStudio(category_id, studio_id):
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
-
