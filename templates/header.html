@@ -1,55 +1,59 @@
 <!DOCTYPE HTML>
 <html>
-   <head>
-      <link rel = stylesheet type = text/css href = '{{url_for('static',filename='styles.css')}}'>
-   </head>
-   <body>
-      <div class="menu">
-         <div class="head1">
+
+<head>
+    <link rel=s tylesheet type=t ext/css href='{{url_for(' static ',filename='styles.css ')}}'>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="head1">
             <center>
-               <h3>
+                <h3>
                   <a href="{{url_for('showCategories')}}">
             </center>
             <center><span class="glyphicon glyphicon-home" aria-hidden="true">
             </span> Show All Categories</center>
             <span class = "logout">
             {%if 'username' not in session %}
+
             <center><a href="{{url_for('showLogin')}}">Click Here to Login </a></center>
             {% else %}
-            <a href="{{url_for('disconnect')}}">Logout</span> </a></h3>
+            <center></center><a href="{{url_for('disconnect')}}">Logout</span> </a></h3></center>
             {% endif %}
-         </div>
-      </div>
-      <div class="container">
-         <div class="row">
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
             <div class="col-md-4">
-               <div class="thumbnail">
-                  <a href="weights" target="_blank">
-                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhKfG2fEhNmb8lUHEoKaIqCtswfTAP4HqavpU2CC0TMod6NvTH" alt="Lights" style="width:100%">
-                     <div class="caption">
-                     </div>
-                  </a>
-               </div>
+                <div class="thumbnail">
+                    <a href="weights" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhKfG2fEhNmb8lUHEoKaIqCtswfTAP4HqavpU2CC0TMod6NvTH" alt="Lights" style="width:100%">
+                        <div class="caption">
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="col-md-4">
-               <div class="thumbnail">
-                  <a href="yoga" target="_blank">
-                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpkkg0iJaeLk9p0GR9fUdz_iFNeus29Erv-o2d2ta0_JbLVNkZUw" alt="Nature" style="width:100%">
-                     <div class="caption">
-                     </div>
-                  </a>
-               </div>
+                <div class="thumbnail">
+                    <a href="yoga" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpkkg0iJaeLk9p0GR9fUdz_iFNeus29Erv-o2d2ta0_JbLVNkZUw" alt="Nature" style="width:100%">
+                        <div class="caption">
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="col-md-4">
-               <div class="thumbnail">
-                  <a href="run" target="_blank">
-                     <img src="https://media.istockphoto.com/photos/young-fitness-woman-running-on-seaside-wooden-boardwalk-picture-id518183416?k=6&m=518183416&s=612x612&w=0&h=O7QeKE-ePt1I4jCcYgYoFX400ADPVdbAmFeEAeTzOyk=" alt="Fjords" style="width:100%">
-                     <div class="caption">
-                     </div>
-                  </a>
-               </div>
+                <div class="thumbnail">
+                    <a href="run" target="_blank">
+                        <img src="https://media.istockphoto.com/photos/young-fitness-woman-running-on-seaside-wooden-boardwalk-picture-id518183416?k=6&m=518183416&s=612x612&w=0&h=O7QeKE-ePt1I4jCcYgYoFX400ADPVdbAmFeEAeTzOyk=" alt="Fjords" style="width:100%">
+                        <div class="caption">
+                        </div>
+                    </a>
+                </div>
             </div>
-         </div>
-      </div>
-   </body>
+        </div>
+    </div>
+</body>
+
 </html>
