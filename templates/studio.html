@@ -1,99 +1,56 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Fanwood+Text" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 </head>
 
 <body>
-    <div class='pane'>
-        <h1>{{ category.name }}</h1> {% with messages = get_flashed_messages() %} {% if messages %}
+    <nav class="global-nav">
+        <span class="url-links">
+          <a href="{{url_for('showCategories')}}">Home</a>
+          {% if 'username' not in session %}
+            <a href="{{url_for('showLogin')}}"> Login </a>
+          {% else %}
+            <a href="{{url_for('gdisconnect')}}"> Logout</a>
+          {% endif %}
+      </span>
+        <hr class="dotted-nav-border">
+        </div>
+    </nav>
 
-        <ul>
-            {% for message in messages %}
-            <li> <strong> {{ message }} </strong> </li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% endwith %} {% if items !=[] %}
+    <h2 class="catalog-header"> STUDIOS </h2>
 
-        <a href="{{url_for('newStudioItem', category_id = category.id )}}">Create New Item</a>
-        </br>
-        </br>
-        <img src="https://www.yogajournal.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_faces:center%2Cq_80%2Cw_620/MTQ2MjI3ODcyMDE5OTgxOTIx/cow-face-with-eagle-arms-forhips.jpg">
-        <h2>“You’re only one workout away from a good mood.” —Unknown</h2> {% for i in items %}
+    <section>
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                {% for i in items %}
+                <div class="text-center col-lg-4">
+                    <div class="classWithPad">
+                        {{i.name}}
+                        <p class="price">
+                            {{i.price}}
+                        </p>
+                        <p class="description">
+                            {{i.description}}
+                        </p>
+                        <a class="edit-item" href="{{url_for('editStudio', category_id = category.id, studio_id = i.id)}}"> Edit </a>
+                        <a class="delete-item" href="{{url_for('deleteStudioItem', studio_id = i.id, category_id = category.id)}}"> Delete </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
-        <p>{{i.name}}</p>
-
-        <p>{{i.description}}</p>
-
-        <p>{{i.Address}}</p>
-
-        <p>{{i.price}}</p>
-
-        <a href='{{url_for(' editStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Edit</a>
-        </br>
-        <a href='{{url_for(' deleteStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
-        </br>
-        </br>
-
-        {% endfor %}
-
-        </br>
-        </br>
-
-        {% for i in items %} {% if i.course == 'Entree' %}
-
-        <p>{{i.name}}</p>
-
-        <p>{{i.description}}</p>
-
-        <p>{{i.price}}</p>
-
-        <a href='{{url_for(' editStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Edit</a>
-        </br>
-        <a href='{{url_for(' deleteStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
-        </br>
-        </br>
-        {% endif %} {% endfor %}
-
-        </br>
-        </br>
-
-        {% for i in items %} {% if i.course == 'Dessert' %}
-
-        <p>{{i.name}}</p>
-
-        <p>{{i.description}}</p>
-
-        <p>{{i.price}}</p>
-
-        <a href='{{url_for(' editStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Edit</a>
-
-        <a href='{{url_for(' deleteStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
-        </br>
-        </br>
-        {% endif %} {% endfor %}
-
-        </br>
-        </br>
-
-        {% for i in items %} {% if i.course == 'Beverage' %}
-
-        <p>{{i.name}}</p>
-
-        <p>{{i.description}}</p>
-
-        <p>{{i.price}}</p>
-
-        <a href='{{url_for(' editStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Edit</a>
-        </br>
-        <a href='{{url_for(' deleteStudioItem ', category_id = category.id, studio_id=i.id ) }}'>Delete</a>
-        </br>
-        </br>
-        {% endif %} {% endfor %} {% else %}
-        <p> You currently have no studio items.
-            <p>
-                <a href="{{url_for('newStudioItem', category_id = category.id )}}">Create New Item</a> {% endif %}
-    </div>
 </body>
 
 </html>
