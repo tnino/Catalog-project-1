@@ -34,7 +34,7 @@ studioItem1 = StudioItem(user_id=1, name="Soul Cycle",
                                      " your body. Find your SOUL",
                          price="$30.00",
                          Address="401 Congress Ave Austin TX 78701",
-                         category=Category1)
+                         category=spin)
 
 session.add(studioItem1)
 session.commit()
@@ -46,7 +46,7 @@ studioItem2 = StudioItem(user_id=1,
                                      " dreams a reality",
                          Address="Ste. K, 809 South Lamar Boulevard,"
                                  "Austin, TX, 78704",
-                         category=Category1)
+                         category=spin)
 
 session.add(studioItem2)
 session.commit()
@@ -60,7 +60,7 @@ studioItem3 = StudioItem(user_id=1,
                          price="$30.00",
                          Address="3220 Amy Donovan Plaza Ste. 128, Austin,"
                                  " Texas 78758",
-                         category=Category1)
+                         category=spin)
 
 session.add(studioItem3)
 session.commit()
@@ -74,7 +74,7 @@ studioItem4 = StudioItem(user_id=1,
                                      "unite us all as a TEAM.",
                          price="$17.00",
                          Address=" 507 Pressler St #900, Austin, TX 78703",
-                         category=Category1)
+                         category=spin)
 
 session.add(studioItem4)
 session.commit()
@@ -93,7 +93,7 @@ studioItem1 = StudioItem(user_id=1, name="Wanderlust Yoga",
                                      " who live,work and visit Austin, Texas.",
                          price="$7.99",
                          Address="206 E 4th St, Austin, TX 78701",
-                         category=Category2)
+                         category=yoga)
 
 session.add(studioItem1)
 session.commit()
@@ -106,7 +106,7 @@ studioItem2 = StudioItem(user_id=1,
                                      " curated by the teachers themselves.",
                          price="$25.00",
                          Address="403 Orchard St, Austin, TX 78703",
-                         category=Category2)
+                         category=yoga)
 
 session.add(studioItem2)
 session.commit()
@@ -119,7 +119,7 @@ studioItem3 = StudioItem(user_id=1,
                                      " transformationin the lives",
                          price="$15.00",
                          Address="2525 Wallingwood Dr #300, Austin, TX 78746",
-                         category=Category2)
+                         category=yoga
 
 session.add(studioItem3)
 session.commit()
@@ -137,7 +137,7 @@ studioItem1 = StudioItem(user_id=1,
                                      "achieving ultimate results.",
                          price="$20.00",
                          Address="2222 Rio Grande St #170, Austin, TX 78705",
-                         category=Category3)
+                         category=Kickboxing)
 
 session.add(studioItem1)
 session.commit()
@@ -152,7 +152,7 @@ studioItem2 = StudioItem(user_id=1,
                                      "thin and elastic or thicker.",
                          price="$10.00",
                          Address="1700 S Lamar Blvd #203, Austin, TX 78704",
-                         category=Category3)
+                         category=Kickboxing)
 
 session.add(studioItem2)
 session.commit()
@@ -163,7 +163,7 @@ studioItem3 = StudioItem(user_id=1,
                                      " available to everyone!",
                          price="$10.00",
                          Address="3232 E Cesar Chavez St, Austin, TX 78702",
-                         category=Category3)
+                         category=Kickboxing)
 
 session.add(studioItem3)
 session.commit()
@@ -180,7 +180,7 @@ studioItem1 = StudioItem(user_id=1,
                                      "driven womens fitness program",
                          price="$17.00",
                          Address="2300 S Lamar Blvd, Austin, TX 78704",
-                         category=Category4)
+                         category=Barre)
 
 session.add(studioItem1)
 session.commit()
@@ -193,7 +193,7 @@ studioItem2 = StudioItem(user_id=1,
                                      "hips,thighs, seat, abdominals and arms.",
                          price="$7.00",
                          Address="10710 Research Blvd #316, Austin, TX 78759",
-                         category=Category4)
+                         category=Barre)
 
 session.add(studioItem2)
 session.commit()
@@ -206,7 +206,7 @@ studioItem3 = StudioItem(user_id=1,
                          price="$20.00",
                          Address="Gables Park Plaza, 115 Sandra Muraida Way, "
                                  "Austin, TX 78703",
-                         category=Category4)
+                         category=Barre)
 
 session.add(studioItem3)
 session.commit()
@@ -226,7 +226,7 @@ studioItem1 = StudioItem(user_id=1,
                                      "Austin, Texas.",
                          price="$15.00",
                          Address="7811 Rockwood Ln, Austin, TX 78757",
-                         category=Category5)
+                         category=Dance)
 
 session.add(studioItem1)
 session.commit()
@@ -238,7 +238,7 @@ studioItem2 = StudioItem(user_id=1,
                                      "Private lessons are also available.",
                          price="$10.00",
                          Address="2417 Buell Ave, Austin, TX 78757",
-                         category=Category5)
+                         category=Dance)
 
 session.add(studioItem2)
 session.commit()
@@ -251,7 +251,7 @@ studioItem3 = StudioItem(user_id=1,
                                      "interested in the art of ballet.",
                          price="$9.00",
                          Address="4624 Burnet Rd, Austin, TX 78756",
-                         category=Category5)
+                         category=Dance)
 
 session.add(studioItem3)
 session.commit()
