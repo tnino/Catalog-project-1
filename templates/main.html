@@ -1,28 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head>
-    <title>Blog-webapp</title>
-</head>
+<body>
 
-<style type="text/css">
-    body {
-        text-align: center;
-        font-family: Arial;
-        background: #FFCFE5;
-    }
+    <div class="container">
 
-    h1 {
-        font-size: 75px;
-        margin-top: -10px;
-    }
-</style>
+        {% block content %} {% endblock %}
+    </div>
+</body>
 
-	<body>
-		<h1 class="text-center"><i>workout studios</i></h1>
-		<hr style="color: black">
-
-		{% block content %}
-		{% endblock %}
-	</body>ssß
 </html>
