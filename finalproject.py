@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import flash
+from functools import wraps
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Category, Base, StudioItem, User
@@ -30,9 +31,18 @@ session = DBSession()
 # set the secret key.
 app.secret_key = "CGKDkh8xrtOhLrHdpyVwPMpA"
 
+
+# Declare my login decorator.
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in login_session:
+            return redirect('/login')
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 # Create anti-forgery state token
-
-
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -41,9 +51,8 @@ def showLogin():
 # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
 
+
 # facebook
-
-
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
     if request.args.get('state') != login_session['state']:
@@ -120,7 +129,6 @@ def fbconnect():
     return output
 
 
-@app.route('/fbdisconnect')
 def fbdisconnect():
     facebook_id = login_session['facebook_id']
     # The access token must me included to successfully logout
@@ -321,6 +329,7 @@ def showCategories():
 
 # Create a new category
 @app.route('/category/new/', methods=['GET', 'POST'])
+@login_required
 def newCategory():
     if 'username' not in login_session:
         return redirect('/login')
@@ -337,16 +346,15 @@ def newCategory():
 
 
 # Edit a category
-
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def editCategory(category_id):
     editedCategory = session.query(
         Category).filter_by(id=category_id).one()
-    if 'username' not in login_session:
-        return redirect('/login')
     if editedCategory.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized to edit this collection. " \
-               "Please create your own collection in order to edit.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert('You are not authorized" \
+               " to edit this category. Please create your own category in " \
+               "order to edit.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
             editedCategory.name = request.form['name']
@@ -360,12 +368,13 @@ def editCategory(category_id):
 
 # Delete a Category
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def deleteCategory(category_id):
-    if 'username' not in login_session:
-        return redirect('/login')
-    categoryToDelete = session.query(
-        Category).filter_by(id=category_id).one()
-    if categoryToDelete.user_id != login_session['user_id']:
+    (Category).filter_by(id=category_id).one()
+    if deleteCategory.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized" \
+               "to delete this category. Please create your own category in" \
+               " order to delete.');}</script><body onload='myFunction()''>"
         if request.method == 'POST':
             session.delete(categoryToDelete)
             session.commit()
