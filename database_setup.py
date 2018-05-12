@@ -44,7 +44,7 @@ class StudioItem(Base):
     price = Column(String(8))
     Address = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    category = relationship(Category, cascade="save-update, merge, delete")
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
@@ -59,7 +59,7 @@ class StudioItem(Base):
             'price': self.price,
             'Address': self.Address,
             'category': self.category,
-            'user_id': self.user_id,
+            'user': self.user,
         }
 
 
@@ -67,4 +67,3 @@ engine = create_engine('sqlite:///collectioncatalog.db')
 
 
 Base.metadata.create_all(engine)
-
