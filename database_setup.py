@@ -1,7 +1,7 @@
 import os
 import sys
-from flask_sqlalchemy import sqlalchemy
-from sqlalchemy import Column, ForeignKey, Integer, String, sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
