@@ -65,8 +65,7 @@ class StudioItem(Base):
             'user': self.user,
         }
 
-
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+ngine = create_engine('postgresql://catalog:password@localhost/catalog')
 
 
 Base.metadata.create_all(engine)
