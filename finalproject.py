@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import flash
 from functools import wraps
-from sqlalchemy import create_engine
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 from database_setup import Category, Base, StudioItem, User
 from flask import session as login_session
