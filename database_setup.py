@@ -66,6 +66,8 @@ class StudioItem(Base):
 
 engine = create_engine('postgresql://catalog:password@localhost/catalog')
 
-
-Base.metadata.create_all(engine)
+Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
+if __name__ == '__main__':
+    Base.metadata.create_all(engine)
+
