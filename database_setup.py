@@ -1,6 +1,6 @@
 import os
 import sys
-import flask
+from flask import flask
 import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey, Integer, String
