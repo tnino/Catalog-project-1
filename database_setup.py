@@ -68,3 +68,4 @@ engine = create_engine('postgresql://catalog:password@localhost/catalog')
 
 
 Base.metadata.create_all(engine)
+DBSession = sessionmaker(bind=engine)
