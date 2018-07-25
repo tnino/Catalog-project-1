@@ -63,7 +63,7 @@ class StudioItem(Base):
             'user': self.user,
         }
 
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('postgresql://catalog:ubuntupassword@localhost/catalog')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
